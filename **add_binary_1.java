@@ -17,7 +17,7 @@ Output: "10101"
 
 
 
-
+/////////////////sol:1//////////
 
 public class AddBinaryNumbersWay2 {
 
@@ -38,4 +38,53 @@ public class AddBinaryNumbersWay2 {
 
  }
 
+}
+
+
+
+
+////////////sol:2//////////////////////
+
+
+
+import java.math.BigInteger;
+class Solution {
+    public  String addBinary(String a, String b) {
+        BigInteger one = new BigInteger(a, 2);
+        BigInteger two = new BigInteger(b, 2);
+        BigInteger sum = one.add(two);
+        return sum.toString(2);
+    }
+}
+
+
+
+
+
+
+/////////////////////////sol:3/////////////////////
+
+
+
+
+
+class Solution {
+    public String addBinary(String a, String b) {
+        int carry =0,sum=0;
+        StringBuilder sb=new StringBuilder();
+        int alen=a.length()-1,blen=b.length()-1;
+        while(alen>=0 || blen>=0){
+            if (alen>=0)
+                sum+=(a.charAt(alen--)-'0');
+            if (blen>=0)
+                sum+=(b.charAt(blen--)-'0');
+            sum=sum+carry;
+            sb.append(sum%2);
+            carry=sum/2;
+            sum=0;
+        }
+        if(carry==1)
+            sb.append(carry);
+        return sb.reverse().toString(); 
+    }
 }
