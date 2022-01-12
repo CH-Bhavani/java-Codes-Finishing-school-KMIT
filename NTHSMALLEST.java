@@ -1,3 +1,6 @@
+/*
+
+
 Scott a Third class is given the scores of the students. He is the leader of the class. 
 His teachers calls him and asks him to call the nth smallest Score secured by the student. 
 Help scott solve the problem. 
@@ -22,3 +25,30 @@ input = 100
 output = 0
 
 in the above test case we have 0 as the first smallest score by the student so the output is 0 
+
+
+*/
+
+
+
+import java.util.*;
+public class nthsmallest{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        String str=sc.next();
+        int ns=sc.nextInt();
+        Set<Character> ts=new TreeSet<>();
+        for(char c: str.toCharArray())
+            ts.add(c);
+        char arr[]=new char[str.length()];
+        Iterator<Character> itr=ts.iterator();
+        int i=0;
+        while(itr.hasNext()){
+            arr[i]=itr.next();
+            i++;
+        }
+        if(ns>ts.size())
+            System.out.println("-1");
+        System.out.println(arr[ns-1]);
+    }
+}
