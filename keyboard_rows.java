@@ -92,3 +92,54 @@ public class test{
     }
     
 }
+
+
+
+//solution-2
+
+
+class Solution {
+    public String[] findWords(String[] words) {
+        String a = "QWERTYUIOPqwertyuiop";
+        String b = "ASDFGHJKLasdfghjkl";
+        String c = "ZXCVBNMzxcvbnm";
+        HashSet<Character> firstRow = new HashSet<>();
+        HashSet<Character> secondRow = new HashSet<>();
+        HashSet<Character> thirdRow = new HashSet<>();
+        
+        for(int i = 0;i<a.length(); i++)
+            firstRow.add(a.charAt(i));
+        
+        for(int i = 0;i<b.length(); i++)
+            secondRow.add(b.charAt(i));
+        
+        for(int i = 0;i<c.length(); i++)
+            thirdRow.add(c.charAt(i));
+        
+        ArrayList<String> list = new ArrayList<String>();
+        
+        for(String word : words){
+            int first = 0;
+            int sec = 0;
+            int third = 0;
+            
+            for(int i=0;i < word.length(); i++){
+                if(firstRow.contains(word.charAt(i))){
+                    first++;
+                }
+                else if(secondRow.contains(word.charAt(i))){
+                    sec++;
+                }
+                else if(thirdRow.contains(word.charAt(i))){
+                    third++;
+                }
+            }
+            
+            if(first == word.length() ||sec == word.length() ||third == word.length()){
+                list.add(word);
+            }   
+        }
+        
+        return list.toArray(new String[list.size()]);
+    }
+}
