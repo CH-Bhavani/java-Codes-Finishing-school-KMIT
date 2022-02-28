@@ -25,7 +25,7 @@ Output Format:
 Print an integer, minimum sum of TopDown path.
 
 
-Sample Input-1:
+Sample Input-1 :
 ---------------
 3
 1 3 2
