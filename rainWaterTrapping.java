@@ -122,3 +122,29 @@ public class test{
         return ans;
     }
 }
+
+
+
+// sol-2
+
+
+
+//      Optimal Approach = TC : O(n) , SC : O(1)
+        int n = a.length,  maxL = 0, maxR = 0, ans = 0;    
+        int l = 0, h = n-1;
+        
+        while(l <= h) {
+            if(a[l] <= a[h]) {
+                maxL = Math.max(maxL,a[l]);
+                ans += maxL - a[l];
+                l++;
+            } else {
+                maxR = Math.max(maxR,a[h]);
+                ans += maxR - a[h];
+                h--;
+            }
+        }
+        return ans;
+                    
+    }
+}
