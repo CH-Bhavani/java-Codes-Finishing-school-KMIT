@@ -32,22 +32,18 @@ Note that {A, B} and {B, A} are considered same.
 
 
 
-
-import java.util.*;
-public class test{
-    public static void main(String [] args){
+mport java.util.*;
+class Main{
+    public static void main(String args[]){
         Scanner sc=new Scanner(System.in);
         int n=sc.nextInt();
-        System.out.println(WaysToArrange(n));
+        System.out.println(getMax(n,new long[n+1]));
     }
-    static int WaysToArrange(int n){
-        int dp[]=new int[n+1];
-        for(int i=0;i<=n;i++){
-            if(i<=2)
-                dp[i]=i;
-            else
-                dp[i]=dp[i-1] +(i-1)*dp[i-2];
-        }
-        return dp[n];
+    public static long getMax(int i,long dp[])
+    {
+        if(i<=2)
+        return dp[i]=i;
+        if(dp[i]>0)
+        return dp[i];
+        return dp[i]=getMax(i-1,dp)+((i-1)*getMax(i-2,dp));
     }
-}
