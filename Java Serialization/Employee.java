@@ -1,5 +1,5 @@
 import java.io.*;
-class  Employee implements Serializable
+public class  Employee implements Serializable
 {
 	String name ;
     String address ;
