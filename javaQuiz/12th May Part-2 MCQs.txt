@@ -1,0 +1,282 @@
+DBMS
+1) The collection of information stored in a database at a particular moment is called as
+
+a) schema
+b) instance of the database
+c) data domain
+d) independence
+
+Answer: b
+
+2) ___________removes all rows from a table without logging the individual row deletions.
+
+a) DELETE
+b) REMOVE
+c) DROP
+d) TRUNCATE
+
+Answer: d
+
+3) The UNION SQL clause can be used with
+
+a) SELECT clause only
+b) DELETE and UPDATE clauses
+c) UPDATE clause only
+d) All of the mentioned
+
+
+Answer: a
+
+
+4) . For designing a normal RDBMS which of the following normal form is considered adequate?
+
+a) 4NF
+b) 3NF
+c) 2NF
+d) 5NF
+
+Answer: b
+Explanation: Because most 3NF tables are free of insertion, update, and deletion anomalies,
+ an RDBMS table is sometimes regarded as “normalized” if it is in the Third Normal Form.
+
+
+
+5) 
+
+SELECT title FROM teacher WHERE fees <= 200000 AND fees >= 80000;
+We can replace this query by which of these?
+
+a.SELECT title FROM teacher WHERE fees BETWEEN 200000 AND 80000;
+b.SELECT title FROM staff WHERE fees BETWEEN 80000 AND 200000;
+c.SELECT title FROM staff WHERE fees <= 80000 AND fees >=200000;
+d.SELECT title FROM teacher WHERE fees BETWEEN 80000 AND 200000;
+
+Answer: (d)
+SELECT title FROM teacher WHERE fees BETWEEN 80000 AND 200000;
+
+
+6) In SQL, which command is used to select only one copy of each set of duplicable rows
+
+(A) SELECT DISTINCT
+(B) SELECT UNIQUE
+(C) SELECT DIFFERENT
+(D) All of these
+
+
+Ans-A
+
+7) 
+
+In a EMS(Exam Management System), the Exam committe decided to 
+add 5 marks to all students as grace marks, 
+Few students secured 96, if they sum the score would be 101. Which is not accepted,
+The committe later thought that it should be rolled back again and they restored the previous value.
+
+Which Property are they talking about
+
+A) Atomicity
+B) Isolation
+C) Durability
+D) Consistency
+
+Ans-A
+
+8)  A scheme describes
+
+(A) Data elements
+(B) Records and files
+(C) Record relationships
+(D) All of these
+
+Answer: Option D
+
+9)
+How can you change "Thomas" into "Michel" in the "LastName" column in the Users table?
+
+A)   UPDATE User SET LastName = 'Thomas' INTO LastName = 'Michel'
+B)   MODIFY Users SET LastName = 'Michel' WHERE LastName = 'Thomas'
+C)   MODIFY Users SET LastName = 'Thomas' INTO LastName = 'Michel'
+D)   UPDATE Users SET LastName = 'Michel' WHERE LastName = 'Thomas'
+
+Ans-D
+
+Explanation: The UPDATE statement is used for modifying the table data by using the SET and WHERE clause. The SET clause is used to change the values of the column specified in the WHERE clause. See the below syntax:
+
+UPDATE table SET column1 = expression1, column2 = expression2,... WHERE conditions
+
+
+10)  Which of the following are the synonyms for Column and ROW of a table?
+
+    Row = [Tuple, Record]
+    Column = [Field, Attribute]
+    Row = [Tuple, Attribute]
+    Columns = [Field, Record]
+
+A)    1 and 2
+B)    3 and 4
+C)    Only 1
+D)    Only 2
+
+Ans-A
+
+
+
+Answer: A
+
+Explanation: In Database Management System (DBMS), we can say that each record is also called a tuple and rows. And each column is called fields and attributes.
+
+
+
+DS
+1) A linear search algorithm’s complexity would be:
+
+a. O(n2)
+b. O(n log n)
+c. O(n)
+d. O(log n)
+
+Answer: (c) O(n)
+
+
+2) Which of the following sorting algorithms has the lowest worst-case complexity?
+
+A Merge sort
+B Bubble sort
+C Quick sort
+D Selection sort
+ 
+
+Ans-A
+
+
+
+3) Consider the following function
+
+ int fun(int n) {
+    int i, j, k = 0;
+    for (i  = n/2; i <= n; i++)
+        for (j = 2; j <= n; j = j * 2)
+            k = k + n/2;
+    return k;
+ }
+
+What is the value returned by the above function?
+
+A O(n^2)
+B O(n^2Logn)
+C O(n^3)
+D O(n^3Logn)
+
+Ans-B
+
+The outer loop runs n / 2 or O(n) times.
+The inner loop executes O(Logn) times (note that j is multiplied by 2 at each iteration).
+Thus, the statement “k = k + n / 2;” executes O(nLogn) times.
+The statement increments the value of k by n / 2. So the value of k becomes n / 2 * O(nLogn)
+ which is O(n ^ 2Logn)
+
+
+4) Consider the following three instructions
+
+    (n + m) ^ k = O(n ^ m), where k and m are constants
+    2 ^ (n + 1) = O(2 ^ n)
+    2 ^ (2n + 1 ) = O(2 ^ n)
+
+Which of the following statements are correct?
+
+A) 1 and 2
+B) 1 and 3
+C) 2 and 3
+D) 1, 2, and 3
+
+Ans-A
+
+(1) (n + m) ^ k = n ^ k + c1 * n ^ (k – 1) + … k ^ m = O(n ^ k)
+(2) 2 ^ (n + 1) = 2 * 2 ^ n = O( 2 ^ n)
+
+
+5) The result of iterating through a binary search tree is _____?
+
+A) An unsorted list
+B) A reverse of the input
+C) A sorted list
+D) None of the above
+
+Ans-C
+
+The binary search tree gives a sorted list when traversed in order.
+
+
+6)  In the following gcd() function, we have : n >= m.
+int gcd(n,m)
+{
+  if (n%m ==0) return m;  
+  n = n%m;
+  return gcd(m, n);
+}
+
+How many recursive calls are made by this function?
+
+A) O(logn)
+B) O(n)
+C) O(loglogn)
+D) O(sqrt(n))
+
+Ans-A
+
+
+7)  Recursion uses more memory space than iterations because _____?
+
+A) It uses the stack instead of the queue.
+B) Each recursive call must be stored.
+C) Both A and B are true.
+D) Aucune de ces réponses n’est vraie.
+
+Ans-B
+
+Recursion uses the stack, but the main reason is that each recursive call must be stored separately in memory.
+
+
+
+8) What is the time complexity of the following code?
+
+int count(int n)
+{
+  int c = 0;
+  for (int i = 0; i < n; i++)
+     for (int j = i; j > 0; j--)
+        c = c + 1;
+  return c;
+}
+
+A) O(n)
+B) O(n^2)
+C) O(n*Logn)
+D) O(n*Logn*Logn)
+
+Ans-B
+
+The time complexity can be calculated by counting the number of times the expression “c = c + 1;” is executed. The expression is executed 0 + 1 + 2 + 3 + 4 + …. + (n-1) times.
+
+Time complexity = O(0 + 1 + 2 + 3 + .. + n-1) = O(n * (n-1) / 2) = O(n ^ 2)  
+
+
+9)  Linked lists are best suited for ____?
+
+A) gathering of permanent data
+B) Size and constantly changing data
+C) All the answers are true
+D) None of these
+
+Ans-B 
+
+
+10) The average complexity occurs in the Linear Search algorithm. 
+When the searched element _______?
+
+A) Is in the middle of the array
+B) Not found in the array
+C) Is the last element of the array
+D) Is the last element of the array or not at all
+
+Ans-A 

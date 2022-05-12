@@ -1,0 +1,626 @@
+Java
+
+1) 
+
+3. public class McGee {
+4. public static void main(String[] args) {
+5. Days d1 = Days.TH;
+6. Days d2 = Days.M;
+7. for(Days d: Days.values()) {
+8. if(d.equals(Days.F)) break;
+9. d2 = d;
+10. }
+11. System.out.println((d1 == d2)?"same old" : "newly new");
+12. }
+13. enum Days {M, T, W, TH, F, SA, SU};
+14. }
+
+What is the result?
+
+A. same old
+B. newly new
+C. Compilation fails due to multiple errors
+D. Compilation fails due only to an error on line 7
+E. Compilation fails due only to an error on line 8
+F. Compilation fails due only to an error on line 11
+G. Compilation fails due only to an error on line 13
+
+Answer: A is correct. All of this syntax is correct. 
+
+The for-each iterates through the enum using the values() method to return an array. 
+Enums can be compared using either equals() or ==. 
+Enums can be used in a ternary operator's Boolean test.
+
+
+
+2) 
+
+ 4. public class SpecialOps {
+5. public static void main(String[] args) {
+6. String s = "";
+7. Boolean b1 = true;
+8. Boolean b2 = false;
+9. if((b2 = false) | (21%5) > 2) s += "x";
+10. if(b1 || (b2 = true)) s += "y";
+11. if(b2 == true) s += "z";
+12. System.out.println(s);
+13. }
+14. }
+
+Which are true? (Choose all that apply.)
+A. Compilation fails
+B. x will be included in the output
+C. y will be included in the output
+D. z will be included in the output
+E. An exception is thrown at runtime
+
+Answer: C is correct. 
+
+First of all, boxing takes care of the Boolean. 
+Line 9 uses the modulus operator,which returns the remainder of the division, which in this case is 1. 
+Also, line 9 sets b2 to false, and it doesn't test b2's value. 
+Line 10 sets b2 to true, and it doesn’t test its value;
+however, the short circuit operator keeps the expression b2 = true from being executed.
+
+
+
+3) 
+
+Given:
+3. public class Spock {
+4. public static void main(String[] args) {
+5. int mask = 0;
+6. int count = 0;
+7. if( ((5<7) || (++count < 10)) | mask++ < 10 ) mask = mask + 1;
+8. if( (6 > 8) ^ false) mask = mask + 10;
+9. if( !(mask > 1) && ++count > 1) mask = mask + 100;
+10. System.out.println(mask + " " + count);
+11. }
+12. }
+
+Which two answers are true about the value of mask and the value of count at line 10?
+(Choose two.)
+A. mask is 0
+B. mask is 1
+C. mask is 2
+D. mask is 10
+E. mask is greater than 10
+F. count is 0
+G. count is greater than 0
+
+Answer:C and F are correct. 
+
+At line 7 the || keeps count from being incremented, but the | allows mask to be incremented. 
+At line 8 the ^ returns true only if exactly one operand is true. 
+At line 9 mask is 2 and the && keeps count from being incremented.
+
+
+4) Given:
+
+3. class SubException extends Exception { }
+4. class SubSubException extends SubException { }
+5.
+6. public class CC { void doStuff() throws SubException { } }
+7.
+8. class CC2 extends CC { void doStuff() throws SubSubException { } }
+9.
+10. class CC3 extends CC { void doStuff() throws Exception { } }
+11.
+12. class CC4 extends CC { void doStuff(int x) throws Exception { } }
+13.
+14. class CC5 extends CC { void doStuff() { } }
+
+What is the result? (Choose all that apply.)
+A. Compilation succeeds
+B. Compilation fails due to an error on line 8
+C. Compilation fails due to an error on line 10
+D. Compilation fails due to an error on line 12
+E. Compilation fails due to an error on line 14
+
+Answer:C is correct. 
+An overriding method cannot throw a broader exception than the method it's overriding. 
+Class CC4's method is an overload, not an override.
+
+
+5) Given:
+3. public class Ebb {
+4. static int x = 7;
+5. public static void main(String[] args) {
+6. String s = "";
+7. for(int y = 0; y < 3; y++) {
+8. x++;
+9. switch(x) {
+10. case 8: s += "8 ";
+11. case 9: s += "9 ";
+12. case 10: { s+= "10 "; break; }
+13. default: s += "d ";
+14. case 13: s+= "13 ";
+15. }
+16. }
+17. System.out.println(s);
+18. }
+19. static { x++; }
+20. }
+
+What is the result?
+A. 9 10 d
+B. 8 9 10 d
+C. 9 10 10 d
+D. 9 10 10 d 13
+E. 8 9 10 10 d 13
+F. 8 9 10 9 10 10 d 13
+G. Compilation fails
+
+Answer: D is correct. 
+Did you catch the static initializer block? Remember that switches work on "fall-thru" logic, 
+and that fall-thru logic also applies to the default case, which is used when no other case matches.
+
+
+6) 
+
+Given:
+3. class Infinity { }
+4. public class Beyond extends Infinity {
+5. static Integer i;
+6. public static void main(String[] args) {
+7. int sw = (int)(Math.random() * 3);
+8. switch(sw) {
+9. case 0: { for(int x = 10; x > 5; x++)
+10. if(x > 10000000) x = 10;
+11. break; }
+12. case 1: { int y = 7 * i; break; }
+13. case 2: { Infinity inf = new Beyond();
+14. Beyond b = (Beyond)inf; }
+15. }
+16. }
+17. }
+And given that line 7 will assign the value 0, 1, or 2 to sw, which are true? (Choose all that apply.)
+
+A. Compilation fails
+B. A ClassCastException might be thrown
+C. A StackOverflowError might be thrown
+D. A NullPointerException might be thrown
+E. An IllegalStateException might be thrown
+F. The program might hang without ever completing
+G. The program will always complete without exception
+
+Answer: D and F are correct. 
+Because i was not initialized, case 1 will throw an NPE. 
+Case 0 will initiate an endless loop, not a stack overflow. 
+Case 2's downcast will not cause an exception.
+
+
+7) 
+
+Given:
+3. public class Circles {
+4. public static void main(String[] args) {
+5. int[] ia = {1,3,5,7,9};
+6. for(int x : ia) {
+7. for(int j = 0; j < 3; j++) {
+8. if(x > 4 && x < 8) continue;
+9. System.out.print(" " + x);
+10. if(j == 1) break;
+11. continue;
+12. }
+13. continue;
+14. }
+15. }
+16. }
+
+What is the result?
+A. 1 3 9
+B. 5 5 7 7
+C. 1 3 3 9 9
+D. 1 1 3 3 9 9
+E. 1 1 1 3 3 3 9 9 9
+F. Compilation fails
+
+Answer: D is correct. 
+The basic rule for unlabeled continue statements is that the current iteration stops early and execution jumps to the next iteration. 
+The last two continue statements are redundant!
+
+
+
+8) Given:
+3. public class OverAndOver {
+4. static String s = "";
+5. public static void main(String[] args) {
+6. try {
+7. s += "1";
+8. throw new Exception();
+9. } catch (Exception e) { s += "2";
+10. } finally { s += "3"; doStuff(); s += "4";
+11. }
+12. System.out.println(s);
+13. }
+14. static void doStuff() { int x = 0; int y = 7/x; }
+15. }
+What is the result?
+A. 12
+B. 13
+C. 123
+D. 1234
+E. Compilation fails
+F. 123 followed by an exception
+G. 1234 followed by an exception
+H. An exception is thrown with no other output
+
+Answer: H is correct. 
+It's true that the value of String s is 123 at the time that the divide-byzero exception is thrown, 
+but finally() is not guaranteed to complete, and in this case
+finally() never completes, so the System.out.println (S.O.P.) never executes.
+
+
+9)
+
+Given:
+3. public class Wind {
+4. public static void main(String[] args) {
+5. foreach:
+6. for(int j=0; j<5; j++) {
+7. for(int k=0; k< 3; k++) {
+8. System.out.print(" " + j);
+9. if(j==3 && k==1) break foreach;
+10. if(j==0 || j==2) break;
+11. }
+12. }
+13. }
+14. }
+What is the result?
+A. 0 1 2 3
+B. 1 1 1 3 3
+C. 0 1 1 1 2 3 3
+D. 1 1 1 3 3 4 4 4
+E. 0 1 1 1 2 3 3 4 4 4
+F. Compilation fails
+
+Answer: C is correct. 
+A break breaks out of the current innermost loop and continues. 
+A labeled break breaks out of and terminates the current loops.
+
+
+
+10) 
+import java.io.*;
+class Keyboard { }
+public class Computer implements Serializable {
+private Keyboard k = new Keyboard();
+public static void main(String[] args) {
+Computer c = new Computer();
+c.storeIt(c);
+}
+void storeIt(Computer c) {
+try {
+ObjectOutputStream os = new ObjectOutputStream(
+new FileOutputStream("myFile"));
+os.writeObject(c);
+os.close();
+System.out.println("done");
+} catch (Exception x) {System.out.println("exc"); }
+}
+}
+What is the result? (Choose all that apply.)
+
+A. exc
+B. done
+C. Compilation fails
+D. Exactly one object is serialized
+E. Exactly two objects are serialized
+
+Answer: A is correct. 
+An instance of type Computer Has-a Keyboard. 
+Because Keyboard doesn't implement Serializable, any attempt to serialize an instance of Computer will cause an exception to be thrown.
+
+
+
+11) Given:
+3. public class Theory {
+4. public static void main(String[] args) {
+5. String s1 = "abc";
+6. String s2 = s1;
+7. s1 += "d";
+8. System.out.println(s1 + " " + s2 + " " + (s1==s2));
+9.
+10. StringBuffer sb1 = new StringBuffer("abc");
+11. StringBuffer sb2 = sb1;
+12. sb1.append("d");
+13. System.out.println(sb1 + " " + sb2 + " " + (sb1==sb2));
+14. }
+15. }
+Which are true? (Choose all that apply.)
+A. Compilation fails
+B. The first line of output is abc abc true
+C. The first line of output is abc abc false
+D. The first line of output is abcd abc false
+E. The second line of output is abcd abc false
+F. The second line of output is abcd abcd true
+G. The second line of output is abcd abcd false
+
+Answer:D and F are correct. 
+
+While String objects are immutable, references to Strings are mutable.
+The code s1 += "d"; creates a new String object.
+ StringBuffer objects are mutable, so the append() is changing the single StringBuffer object to which both StringBuffer references refer.
+
+
+12)
+
+Given:
+3. import java.io.*;
+4. class Vehicle { }
+5. class Wheels { }
+6. class Car extends Vehicle implements Serializable { }
+7. class Ford extends Car { }
+8. class Dodge extends Car {
+9. Wheels w = new Wheels();
+10. }
+Instances of which class(es) can be serialized? (Choose all that apply.)
+A. Car
+B. Ford
+C. Dodge
+D. Wheels
+E. Vehicle
+
+Answer: A and B are correct. 
+Dodge instances cannot be serialized because they "have" an instance of Wheels, which is not serializable. Vehicle instances cannot be serialized even though the subclass Car can be.
+
+
+
+13)
+
+3. import java.util.*;
+4. public class Looking {
+5. public static void main(String[] args) {
+6. String input = "1 2 a 3 45 6";
+7. Scanner sc = new Scanner(input);
+8. int x = 0;
+9. do {
+10. x = sc.nextInt();
+11. System.out.print(x + " ");
+12. } while (x!=0);
+13. }
+14. }
+
+What is the result?
+A. 1 2
+B. 1 2 3 45 6
+C. 1 2 3 4 5 6
+D. 1 2 a 3 45 6
+E. Compilation fails
+F. 1 2 followed by an exception
+
+Answer: F is correct. 
+The nextXxx() methods are typically invoked after a call to a hasNextXxx(),
+which determines whether the next token is of the correct type.
+
+
+
+14) public abstract class Test implements Runnable
+{
+  public void m1() { }
+}
+
+A) Compilation fails because it didnt implement run method
+B) Compilation fails because it didnt contain abstract methods
+C) compiles fine
+D) None of these
+
+ANs-C
+
+
+15) class One extends Thread {
+public void run() {
+for(int i=0;i<2;i++)
+System.out.print(i);
+}
+}
+}
+
+public class Test{
+public static void main(String [] args) {
+Test t= new Test();
+t.call(new One());
+}
+public void call(One n){
+o.start();
+}
+}
+
+
+A) 0 0
+B) Compilation fails
+C) 0 1
+D) None of these
+
+Ans-C
+
+
+16)  In which area of a class are function and data directly accessible, even outside the class?
+
+a) Private
+b) Protected
+c) Public
+d) None
+
+
+Answer: c
+
+
+
+17) 
+
+A Class consists of which of these abstractions?
+A. Set of the objects 
+B. Operations 
+C. Attributes 
+D. All of the mentioned 
+E. Both Operations and Attributes
+
+
+Ans-D
+
+
+
+18)
+
+Which keyword when applied on a method indicates that only one thread should execute the method at a time. Select the one correct answer.
+A. transient 
+B. volatile 
+C. synchronized 
+D. native 
+E. static 
+
+Ans-C
+
+
+
+19) 
+
+class Bar { } 
+class Test 
+{  
+    Bar doBar() 
+    {
+        Bar b = new Bar(); /* Line 6 */
+        return b; /* Line 7 */
+    } 
+    public static void main (String args[]) 
+    { 
+        Test t = new Test();  /* Line 11 */
+        Bar newBar = t.doBar();  /* Line 12 */
+        System.out.println("newBar"); 
+        newBar = new Bar(); /* Line 14 */
+        System.out.println("finishing"); /* Line 15 */
+    } 
+}
+
+At what point is the Bar object, created on line 6, eligible for garbage collection?
+
+A. 	after line 12
+B. 	after line 14
+C. 	after line 7, when doBar() completes
+D. 	after line 15, when main() completes
+
+Answer: Option B
+
+Explanation:
+
+Option B is correct. All references to the Bar object created on line 6 are destroyed when a new reference to a new Bar object is assigned to the variable newBar on line 14. Therefore the Bar object, created on line 6, is eligible for garbage collection after line 14.
+
+Option A is wrong. This actually protects the object from garbage collection.
+
+Option C is wrong. Because the reference in the doBar() method is returned on line 7 and is stored in newBar on line 12. This preserver the object created on line 6.
+
+Option D is wrong. Not applicable because the object is eligible for garbage collection after line 14.
+
+
+20) What is the numerical range of char?
+A. 	0 to 32767
+B. 	0 to 65535
+C. 	-256 to 255
+D. 	-32768 to 32767
+
+Answer: Option B
+
+
+
+Psuedocode
+
+
+1)
+x = 40
+y = 35
+z = 20
+w = 10
+
+If these are the values assigned, comment on the output of these two statements.
+
+Statement 1: print x * y / z w
+Statement 2: print x * y / (z w)
+
+
+a) The output will change by 80
+b) Change by 160
+c) Change by 50
+d) Will remain the same
+
+Answer: a
+
+
+
+2) 
+
+Integer j=41,k=37
+Assign j to j+1
+Assign k to k-1
+Assign j to j/k
+Assign k to k/j
+Print the value of k,j
+
+A) 42 36
+B) 36 1
+C) 1 1
+D) 1 36
+
+Ans- D
+
+
+
+3) integer fun(integer c)
+         print c
+             if(c<3)
+                  c=c+2
+                    fun(fun(c))
+             end if
+             return c
+    end function fun
+
+what is the output when c=1
+
+A) 1 3 3
+B) 1 3 5
+C) 1
+D) 3
+
+Ans-A
+
+4) 
+fun(str a)
+    IF(str equals null)
+       return
+    END IF
+     fun(a+1)
+     fun(a+1)
+    print a
+end FUN
+ 
+input a="pqr"
+   
+Here a+1 means it will go index of a
+if a="abc" a+1 means it will start from "b"
+ 
+A) rrqrrrqrpqr
+B) rrqrrrqr
+C) pqrrrqrrrqrpqr
+D) fun never terminates
+E) None of these
+
+Ans-1
+
+5) 
+
+void reverse(Integer n)
+  IF N GREATER THAN 5 THEN
+   EXIT
+    END IF
+    print n
+      Return Reverse(n++)
+   END REVERSE
+
+A) 1 2 3 4 5
+B) 1 24 6 8
+C) 1 2 5 3 4
+D) None of the above
+
+Prints 1 Infinite times
