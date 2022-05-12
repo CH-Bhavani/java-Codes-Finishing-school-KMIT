@@ -57,3 +57,32 @@ public static int count(String s){
     return hm.size();
 }
 }
+
+
+
+
+
+//sol-2
+
+
+
+public int numSplits(String s) {
+        HashSet<Character> hs=new HashSet();
+        int[] l=new int[s.length()];
+        int[] r=new int[s.length()];
+        for(int i=0;i<s.length();i++){
+            hs.add(s.charAt(i));
+            l[i]=hs.size();
+        }
+        hs.clear();
+        for(int i=s.length()-1;i>=0;i--){
+            hs.add(s.charAt(i));
+            r[i]=hs.size();
+        }
+        int count=0;
+        for(int i=0;i<s.length()-1;i++){
+            if(l[i]==r[i+1])
+                count++;
+        }
+        return count;
+    }
