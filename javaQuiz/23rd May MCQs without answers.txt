@@ -1,0 +1,306 @@
+1)
+
+
+public class BitLogic {
+public static void main(String [] args)
+{
+int a=3;
+int b = 6;
+int c =a|b;
+int d = a^b;
+int e = (~a&b)|(a&~b);
+System.out.print("c="+c);
+System.out.print("d="+d);
+System.out.print("e="+e);
+}
+}
+
+
+ 
+
+2) class Parent
+{
+    int i=10;
+    int j=50;
+}
+
+class Child extends Parent 
+{
+      int i=20;
+      int x=40;
+     void show() {
+     System.out.print(" i ="+i);
+     System.out.print(" x = "+x);
+     System.out.print("i : "+super.i);
+     System.out.print("j : "+j);
+     j++;
+ }
+}
+
+class SuperDemo2 {
+   public static void main(String [] args) 
+{
+    Child s= new Child();
+    s.show();
+}
+}
+
+A) i:20 x:40 i:10 j:50
+B) i:20 x:40 i:10 j:51
+C) i:20 x:40 i:20 j:51
+D) i:20 x:40 i:20 j:50
+
+
+
+
+
+3)
+
+public class Test
+{
+     static String sentence ="Welcome to static";
+     static int number = 68;
+static 
+{
+     sentence = " Welcome to Data ";
+     number = 69;
+}
+public static void main(String [] args) 
+{
+   System.out.println(" Value of Integer : " + number);
+}
+}
+
+
+A) Welcome to Data
+     Value of Integer : 69
+B) Value of Integer : 68
+C) Welcome to static 
+     Value of Integer : 69
+D) Value of Integer 69
+
+
+
+
+
+4)
+
+class B {
+    static int i;
+    static int j;
+    static {
+        i = 15;
+        j = i - 5;
+    }
+    public static void main(String[] args) {
+        int i = 0;
+        A a = null;
+        for (; i < 3; i++) {
+            a = new A();
+            a.i = B.i;
+            B.i += a.add(a.operate(i));
+        }
+        System.out.println(B.i + " " + B.j + " " + i + " " + a.i);
+    }
+}
+
+class A {
+    int i = 0;
+   int operate(int i) {
+        if (B.j - i == i * i * i) return -i;
+        return i * i;
+    }
+    int add(int i) {
+        return this.i + i;
+    }
+}
+
+
+A)14 10 3 0
+B)14 10 3 16
+C)120 10 3 61
+D)Some other output not shown here
+E)Compilation Error
+
+
+
+
+
+
+5)
+
+public class ImportantQuestion 
+{
+     public static void main(String [] args)
+   {
+        Mc mc = new Mc("JAVA");
+	System.out.println(mc.language());
+}
+}
+
+final class Mc {
+final String java;
+public Mc(String java)
+{
+    this.java = java;
+}
+public String language()
+{
+        System.out.println(java);
+	return java;
+}
+}
+
+
+A) java
+JAVA
+B) JAVA
+java
+C) Some other output
+D) Compilation Error or Runtime Exception
+
+
+
+
+6)
+What will be the output of the following program?
+public class Sketch {
+    static int ad = 100;
+    static int bc = 200;
+    static {
+        ad += 1;
+        bc += 1;
+    }
+    public static void main(String args[]) {
+        ad += 5;
+        bc += 10;
+        System.out.println(ad + bc);
+    }
+    static {
+        ad += 100;
+        bc += 200;
+    }
+}
+
+
+A)317
+B)615
+C)617
+D)315
+E) Compilation Error or Runtime Error
+
+
+
+
+7)
+import java.io.*;
+    class Chararrayinput {
+        public static void main(String[] args) {
+	    String obj  = "abcdefgh";
+            int length = obj.length();
+            char c[] = new char[length];
+            obj.getChars(0, length, c, 0);
+            CharArrayReader input1 = new CharArrayReader(c);
+            CharArrayReader input2 = new CharArrayReader(c, 1, 4);
+            int i;
+            int j;
+            try {
+		while((i = input1.read()) == (j = input2.read())) {
+                    System.out.print((char)i);
+                }
+       	    } 
+            catch (IOException e) {
+                e.printStackTrace();
+	    }
+	}
+    }
+
+
+
+A. abc
+B. abcd
+C. abcde
+D. None of the mentioned
+
+
+
+
+
+8)
+What is the output of the following function for given linked list 1->2->3->4->5->6 
+with starting pointing to the first Node of linked list ?
+
+void fun(struct node *start)
+{
+    if(start==NULL)
+         return;
+    printf(" %d ", start->data);
+    
+if(start->next != NULL)
+     fun(start->next->next);
+   printf("%d ", start->data);
+}
+
+A) 1 3 5 1 3 5
+B) 1 3 5 6 4 2
+C) 1 3 5 2 4 6
+D) 1 3 5 5 3 1
+
+
+
+
+
+9)
+
+Object oriented inheritance models
+A) Is a kind of relationship
+B) Has a relationship
+C) Want to be relationship
+D) inheritance doesnot describe any kind of relationship  between classes
+E) contains of relationship​
+
+
+
+10)
+public class Test
+{
+    public static void main(String [] args)
+{
+     System.out.println(10+20+"EPAM");
+     System.out.println("EPAM"+10+20);
+    System.out.println(10*20+"EPAM");
+    System.out.println("EPAM"+10*20);
+}
+}
+A) Compilation Error
+
+B) 30EPAM
+     EPAM1020
+     10*20EPAM
+     EPAM10*20
+
+C) 30EPAM
+    EPAM1020
+    200EPAM
+    EPAM200
+
+D) 30EPAM
+     EPAM1030
+
+
+
+11)
+public string void main(String [] args)
+{
+    String a="epam";
+    String b="epam";
+     a.concat(b);
+     System.out.println(a);
+}
+
+A) epam
+B) epamepam
+C) Compilation fails
+D) None of these
+
+
