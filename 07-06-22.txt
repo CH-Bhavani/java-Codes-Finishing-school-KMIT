@@ -1,0 +1,54 @@
+/*
+Tarun is working with Strings.
+He will be given two words, in which he has to break each word into two parts
+First Word- W1+W2
+Second Word - W3+W4 
+
+After breaking each word into two parts, check if the new word can formed in such a way that,
+W1+W4 or W2+W3 should be same from left to right (or) right to left. 
+
+if it can be done print 'yes' else print 'no' 
+
+Note - Breaking the words should be done at same index position
+
+When you break a string 's' into s1 and s2 , either s1 or s2 is allowed to be empty. 
+For example, if s ="abc" , then "" + "abc" , "a" + "bc" , "ab" + "c" , and "abc" + "" are valid breaks.
+
+input =mortal carrom
+output = yes
+
+Break First word ="mortal" and Second word ="carrom" at index 3 as follows:
+    First word -> "mor" + "tal", W1 = "mor" and W2 = "tal"
+    Second word -> "car" + "rom", W3 = "car" and W4 = "rom"
+
+W1 + W4 = "morrom" is a same from left to right and right to left,so print yes
+
+input =romans carrom
+output = no 
+
+
+*/
+
+
+
+
+
+/*
+Given a number print the number of ways to represent the in string format.
+given number is between 1 and 26 and these numbers represented as A to Z
+
+example:
+input =1176
+output =3
+1176  can be split three ways 1 1 7 6 or 11 7 6 or 1 17 6 or 1 1 76
+
+AAGF(1 1 7 6), KGF(11 7 6), (AQF)1 17 6 , 1 1 76 is invalid
+
+
+input=326
+output =2 
+326 can be split into two ways 3 2 6  or 3 26 or 32 6
+CBF(3 2 6) CZ(3 26) only two ways (32 6) not valid split.
+
+
+*/

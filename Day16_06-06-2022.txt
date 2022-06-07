@@ -1,0 +1,254 @@
+PROGRAM-1
+
+
+
+/*
+Ravi is playing with strings,help him to find sum of the difference in frequencies between the most frequent and least frequent characters in all it's substrings.
+
+input =aabcb
+output =5
+
+Explanation:
+for aabcb 
+the substrings are 
+with length 1 => a a b c b  =>  in each substring max and min is 1 so 1-1 =0
+with length 2 => aa ab bc cb => in each substring max and min is 1-1 =0
+with length 3 => aab abc bcb => 
+	for aab=> 2-1 =1
+	for abc=> 1-1 =0
+	for bcb=> 2-1 =1
+with length 4 => aabc abcb
+	for aabc => 2-1 =1
+	for abcb => 2-1 =1
+with length 5 => aabcb
+	for aabcb => 2-1 =1
+
+so total sum of difference of most frequent to least frequent is 
+1+1+1+1+1=5
+
+
+input =aabcbaa
+output =17
+
+
+*/
+import java.util.*;
+class Test
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        List<Integer> l = new ArrayList<>();
+        List<String> l1 = new ArrayList<>();
+        int n = s.length();
+        for(int j=0;j<n;j++)
+        {
+            for(int i=0;i<n;i++)
+            {
+                if((i+j+1)<=n)
+                {
+                    l1.add(s.substring(i,i+j+1));
+                }
+            }
+            
+            for(String a:l1)
+            {
+                int max = maxfreq(a);
+                int min = minfreq(a);
+                l.add(max-min);
+            }
+            l1.clear();
+        }
+        int sum=0;
+        for(int x:l)
+            sum+=x;
+        System.out.println(sum);
+    }
+    public static int maxfreq(String a)
+    {
+        Map<Character,Integer> m = new HashMap<>();
+        int n = a.length();
+        for(int i=0;i<n;i++)
+        {
+            if(!m.containsKey(a.charAt(i)))
+                m.put(a.charAt(i),0);
+            m.put(a.charAt(i),m.get(a.charAt(i))+1);
+        }
+        int max=0;
+        for(char c:m.keySet())
+        {
+            if(m.get(c)>max)
+                max=m.get(c);
+        }
+        return max;
+    }
+    public static int minfreq(String a)
+    {
+        Map<Character,Integer> m = new HashMap<>();
+        int n = a.length();
+        for(int i=0;i<n;i++)
+        {
+            if(!m.containsKey(a.charAt(i)))
+                m.put(a.charAt(i),0);
+            m.put(a.charAt(i),m.get(a.charAt(i))+1);
+        }
+        int min=Integer.MAX_VALUE;
+        for(char c:m.keySet())
+        {
+            if(m.get(c)<min)
+                min=m.get(c);
+        }
+        return min;
+    }
+}
+
+
+
+
+
+PROGRAM-2
+
+
+
+/*
+Given an array, display the output in ascending order by the number of 1's in binary format of that number.
+sort the elements in ascending order of frequency of 1's.
+
+ex:
+input =9
+0 1 2 3 4 5 6 7 8 
+output =0 1 2 4 8 3 5 6 7
+explanation: 
+0 is the only integer with 0 bits
+1 2 4 8 all have 1 bits
+3 5 6 all have 2 bits 
+7 has 3 bits
+so sorted array by bits is 0 1 2 4 8 3 5 6 7
+
+
+input =11
+1024 512 256 128 64 32 16 8 4 2 1
+output =1 2 4 8 16 32 64 128 256 512 1024
+
+
+*/
+
+import java.util.*;
+class Test
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        long arr[] = new long[n];
+        for(int i=0;i<n;i++)
+            arr[i]=sc.nextInt();
+        TreeMap<Long,Integer> m = new TreeMap<>();
+        for(int i=0;i<n;i++)
+        {
+            m.put(arr[i],Integer.bitCount((int)arr[i]));
+        }
+        List<Long> l = new ArrayList<>();
+        int j=0;
+        while(true)
+        {
+            for(long x:m.keySet())
+            {
+                if(m.get(x)==j)
+                    l.add(x);
+            }
+            j++;
+            if(l.size()==n)
+                break;
+        }
+        System.out.println(l);
+    }
+}
+
+
+
+
+
+PROGRAM-3
+
+
+
+/*
+EPAM is planning to conduct the technical interview for 2n students
+EPAM has given the cost of flying a technical person to city A,city B. 
+
+EPAM HR wants to find the minimum cost to fly every technical panel member to a city 
+such that n technical panel members arrive in each city. 
+
+Example 1:
+The first line of input contains the numbers of pairs of such cities.
+
+input =4
+10 20 30 200 400 50 30 20
+output = 110
+
+
+Explanation:
+[10 20] [30 200] [400 50] [30 20]
+
+
+The first person goes to city A for a cost of 10.
+The second person goes to city A for a cost of 30.
+The third person goes to city B for a cost of 50.
+The fourth person goes to city B for a cost of 20.
+The total minimum cost is 10 + 30 + 50 + 20 = 110 to have half the people interviewing in
+each city.
+
+
+
+Example 2:
+
+input = 4
+costs = 20 60 10 50 40 200 30 300
+output = 180
+
+Explanation:
+costs[i] = [ACost, BCost]
+costs = [[20,60],[10,50],[40,200],[30,300]]
+
+If you go by the minimum cost you might get the cost as below
+TotalMinimumCost= 10 + 20 + 300 + 200 = 530
+but actualMinimumCost=30 + 40 + 50 + 60 =180
+
+Constraints:
+2 * n == costs.length
+2 <= costs.length <= 100
+costs.length is even.
+1 <= aCost , bCost <= 1000
+
+
+*/
+
+
+
+import java.util.*;
+class Test{
+    public static void main(String []args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int arr[][]=new int[n][2];
+        for(int i=0;i<n;i++){
+            arr[i][0]=sc.nextInt();
+            arr[i][1]=sc.nextInt();
+        }
+        Arrays.sort(arr,(a, b) -> {
+            return (a[0] - a[1]) - (b[0] - b[1]);
+        });
+        int cost=0;
+        for(int i = 0; i < arr.length / 2; i++){
+            cost += arr[i][0];
+        }
+        for(int i = arr.length / 2; i < arr.length; i++){
+            cost += arr[i][1];
+        }
+        System.out.println(cost);
+    }
+}
+
+
